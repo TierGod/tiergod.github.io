@@ -144,7 +144,96 @@
       <button onclick="addMedicine()">Add Medicine</button>
     </div>
 
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
+    <script>
+      let chart;
+
+      function addMedicine() {
+        const type = document.getElementById("itemType").value;
+        const name = document.getElementById("name").value.trim();
+        const manufacturer = document.getElementById("manufacturer").value.trim();
+        const expiry = document.getElementById("expiry").value;
+        const received = document.getElementById("received").value;
+
+        if (!type || !name || !manufacturer || !expiry || !received) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        const table = document.getElementById("medicineTable").getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow();
+
+        newRow.innerHTML = `
+          <td>${type}</td>
+          <td>${name}</td>
+          <td>${manufacturer}</td>
+          <td>${expiry}</td>
+          <td>${received}</td>
+          <td><button onclick="deleteRow(this)">Delete</button></td>
+        `;
+
+        highlightRowByExpiry(newRow);
+        updateChart();
+
+        // Clear fields
+        document.getElementById("itemType").value = '';
+        document.getElementById("name").value = '';
+        document.getElementById("manufacturer").value = '';
+        document.getElementById("expiry").value = '';
+        document.getElementById("received").value = '';
+      }
+
+      function deleteRow(button) {
+        const row = button.parentNode.parentNode;
+        row.remove();
+        updateChart();
+      }
+
+      function highlightRowByExpiry(row) {
+        const expiryDate = new Date(row.cells[3].textContent);
+        const today = new Date();
+        const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+
+        row.classList.remove("expired", "expiring-soon");
+
+        if (daysLeft < 0) {
+          row.classList.add("expired");
+        } else if (daysLeft <= 30) {
+          row.classList.add("expiring-soon");
+        }
+      }
+
+      function updateChart() {
+        const rows = document.querySelectorAll("#medicineTable tbody tr");
+        let expired = 0, expiringSoon = 0, valid = 0;
+        const today = new Date();
+
+        rows.forEach(row => {
+          const expiryDate = new Date(row.cells[3].textContent);
+          const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+
+          if (daysLeft < 0) expired++;
+          else if (daysLeft <= 30) expiringSoon++;
+          else valid++;
+        });
+
+        const data = [valid, expiringSoon, expired];
+
+        if (chart) chart.destroy();
+
+        const ctx = document.getElementById('expiryChart').getContext('2d');
+        chart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ['Valid', 'Expiring Soon (≤30 days)', 'Expired'],                 //error here
+            datasets: [{
+              data: data,
+              backgroundColor: ['#b3e6cc', '#ffcc80', '#ff9999']
+            }]
+          },
+          
+    </script> 
    
 </div>
 
