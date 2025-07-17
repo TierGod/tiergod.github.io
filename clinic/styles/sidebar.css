@@ -20,6 +20,7 @@
   border-style: solid;
   border-color: rgb(12, 124, 49);
   transition: transform .5s;
+  border-radius: 5px;
 }
 
 .sidebar-link:hover {
