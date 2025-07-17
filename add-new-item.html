@@ -235,27 +235,7 @@
               backgroundColor: ['#b3e6cc', '#ffcc80', '#ff9999']
             }]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'bottom'
-              },
-              title: {
-                display: true,
-                text: 'Medicine Expiry Status'
-              }
-            }
-          }
-        });
-      }
-
-      // Initialize
-      window.onload = function () {
-        const rows = document.querySelectorAll("#medicineTable tbody tr");
-        rows.forEach(row => highlightRowByExpiry(row));
-        updateChart();
-      };
+          
     </script>
 </div>
 
