@@ -47,3 +47,11 @@ background-color: lightgray;
   margin: 0 auto;
   transform: scale(1.1);
 }
+
+.image-expand:hover {
+  width: 40px;
+  height: 40px;
+  transition: transform .4s;
+  margin: 0 auto;
+  transform: scale(1.1);
+}
