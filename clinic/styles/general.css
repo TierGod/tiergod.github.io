@@ -1,0 +1,35 @@
+p {
+  font-family: 'Times New Roman', Times, serif, arial;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px ;
+}
+
+body {
+  margin: 0;
+  padding-top: 80px;
+  padding-left: 100px ;
+  padding-right: 30px;
+  background-color: rgb(247, 244, 244);
+}
+
+/* Slide Show - Image*/
+.slider-image {
+  width: 500px;
+  height: 500px;
+  border: black 1px solid;
+  display: flex;
+  margin-left: 5%;
+}
+
+.home-flex-container {
+  display: flex;
+}
+
+.dashboard-flex-container{
+justify-content: center;
+  display: flex;
+  width: 100%;
+  align-content: stretch;
+}
+
