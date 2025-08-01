@@ -1,0 +1,11 @@
+.content-container {
+  border: none;
+  display: flex;
+  align-content: stretch;
+  justify-content: center;
+}
+ p {
+  font-size: 20px;
+  font-family: roboto, sans-serif;
+  
+ }
